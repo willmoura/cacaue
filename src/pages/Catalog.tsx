@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useLocation } from 'react-router-dom';
-import { products } from '../data/mock';
+import { products } from '../data/products';
 import ProductCard from '../components/ui/ProductCard';
 import PageWrapper from '../components/layout/PageWrapper';
 import { cn } from '../lib/utils';

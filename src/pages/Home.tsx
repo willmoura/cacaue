@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { ArrowRight, Thermometer, Gem, Clock } from 'lucide-react';
-import { products, testimonials } from '../data/mock';
+import { products, testimonials } from '../data/products';
 import ProductCard from '../components/ui/ProductCard';
 import PageWrapper from '../components/layout/PageWrapper';
 import { createWhatsappLink } from '../lib/utils';

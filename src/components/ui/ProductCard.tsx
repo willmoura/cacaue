@@ -2,7 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { ArrowRight } from 'lucide-react';
 import { motion } from 'framer-motion';
-import { Product } from '../../data/mock';
+import { Product } from '../../data/products';
 
 // Create a motion component from the Link
 const MotionLink = motion(Link); // using motion(Link) is deprecated in newer framer versions in favor of motion.create(Link), but keeping compatible

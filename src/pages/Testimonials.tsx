@@ -1,5 +1,5 @@
 import React from 'react';
-import { testimonials } from '../data/mock';
+import { testimonials } from '../data/products';
 import { Quote } from 'lucide-react';
 import PageWrapper from '../components/layout/PageWrapper';
 import { motion } from 'framer-motion';

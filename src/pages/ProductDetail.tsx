@@ -1,6 +1,6 @@
 import React from 'react';
 import { useParams, Link } from 'react-router-dom';
-import { products } from '../data/mock';
+import { products } from '../data/products';
 import { createWhatsappLink, cn } from '../lib/utils';
 import { ArrowLeft, Check, Download, Info } from 'lucide-react';
 import PageWrapper from '../components/layout/PageWrapper';
