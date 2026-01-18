@@ -3,7 +3,7 @@ export interface Product {
   id: string;
   slug: string;
   name: string;
-  category: "Intenso" | "Ao Leite" | "Especiais" | "Zero Lactose"; 
+  category: "Ao Leite" | "Especiais" | "Dietas"; 
   cocoaContent?: number;
   weights: string[];
   shortDescription: string;
@@ -12,6 +12,7 @@ export interface Product {
   nutrition: Record<string, string>;
   tags: string[];
   imageUrl: string;
+  images?: string[];
 }
 
 export const products: Product[] = [
@@ -21,54 +22,43 @@ export const products: Product[] = [
     name: "Ovo Ao Leite Clássico",
     category: "Ao Leite",
     cocoaContent: 35,
-    weights: ["250g", "350g"],
+    weights: ["100g","150g","180g","250g","250g", "350g"],
     shortDescription: "O sabor tradicional do chocolate ao leite. Cremoso e derrete na boca.",
     longDescription: "Nosso clássico Ovo de Páscoa ao Leite é produzido com chocolate nobre, garantindo uma textura aveludada e um sabor equilibrado. Ideal para quem não abre mão da tradição e qualidade.",
-    specs: ["Cacau: 35%", "Textura: Cremosa", "Temperagem: Perfeita", "Embalagem: Protetora"],
+    specs: ["Textura: Cremosa", "Temperagem: Perfeita", "Embalagem: Protetora"],
     nutrition: { "Porção": "25g", "Valor Energético": "135kcal", "Carboidratos": "14g" },
-    tags: ["Clássico", "Ao Leite", "Best Seller"],
+    tags: ["Clássico", "Ao Leite", "Mais Vendido"],
     imageUrl: "/img/ovo_ao_leite.png"
   },
   {
     id: "2",
-    slug: "ovo-especial-crocante",
-    name: "Ovo Especial Crocante",
+    slug: "barra-artesanal-personalizada",
+    name: "Barra Personalizada: Identidade & Sabor",
     category: "Especiais",
-    weights: ["400g"],
-    shortDescription: "Chocolate ao leite com flocos de arroz crocantes. Uma experiência divertida.",
-    longDescription: "A linha Especial traz a combinação favorita dos brasileiros: Chocolate ao leite de alta qualidade misturado com flocos de arroz crocantes. Uma explosão de textura a cada mordida.",
-    specs: ["Base: Chocolate Ao Leite", "Inclusão: Flocos de Arroz", "Textura: Crocante"],
-    nutrition: { "Porção": "25g", "Valor Energético": "130kcal", "Gorduras Totais": "7g" },
-    tags: ["Crocante", "Especial", "Kids"],
-    imageUrl: "https://images.unsplash.com/photo-1627289844431-7004f1295325?auto=format&fit=crop&q=80&w=800"
+    weights: ["70g"],
+    shortDescription: "Sua marca, brasão ou ponto turístico gravado em chocolate nobre. A tradução do orgulho local em sabor.",
+    longDescription: "Unimos a sofisticação do nosso chocolate à identidade da sua cidade. Nossas barras personalizadas permitem a gravação de brasões municipais, monumentos históricos ou logotipos institucionais com alta definição. É a escolha perfeita para um brinde memorável.",
+    specs: ["Base: Chocolate Ao Leite, Amargo ou Branco", "Textura: Cremosa", "Personalização: Relevo detalhado sob encomenda"],
+    nutrition: { "Porção": "25g", "Valor Energético": "135kcal", "Gorduras Totais": "8g" },
+    tags: ["Institucional", "Turismo", "Brinde", "Exclusivo", "Presente"],
+    imageUrl: "/img/torre.png",
+    images: [
+      "/img/torre.png",
+      "/img/barrinha.png"
+    ]
   },
   {
     id: "3",
     slug: "ovo-zero-lactose",
     name: "Ovo Zero Lactose",
-    category: "Zero Lactose",
-    cocoaContent: 50,
-    weights: ["300g"],
-    shortDescription: "Todo o sabor do cacau em uma versão segura para dietas com restrição.",
-    longDescription: "Desenvolvido especialmente para intolerantes à lactose, sem abrir mão do sabor. Utilizamos chocolate 50% cacau e tecnologia de enzimas para garantir um produto seguro e delicioso.",
-    specs: ["Lactose: 0%", "Cacau: 50%", "Segurança: Testado"],
+    category: "Dietas",
+    weights: ["180g"],
+    shortDescription: "Todo o sabor do cacau em uma versão para dietas com restrição.",
+    longDescription: "Desenvolvido especialmente para intolerantes à lactose, sem abrir mão do sabor.",
+    specs: ["Lactose: 0%"],
     nutrition: { "Porção": "25g", "Valor Energético": "125kcal", "Lactose": "0g" },
-    tags: ["Zero Lactose", "Inclusivo", "Saudável"],
-    imageUrl: "https://images.unsplash.com/photo-1549880181-56a44cf4a9a1?auto=format&fit=crop&q=80&w=800"
-  },
-  {
-    id: "4",
-    slug: "ovo-intenso-70",
-    name: "Ovo Intenso 70%",
-    category: "Intenso",
-    cocoaContent: 70,
-    weights: ["350g"],
-    shortDescription: "Para os amantes do cacau puro. Notas profundas e intensas.",
-    longDescription: "Uma experiência sensorial para puristas. Produzido com cacau selecionado, este ovo apresenta um perfil aromático complexo, com acidez equilibrada e final longo.",
-    specs: ["Cacau: 70%", "Origem: Bahia", "Perfil: Intenso"],
-    nutrition: { "Porção": "25g", "Valor Energético": "135kcal", "Carboidratos": "11g" },
-    tags: ["Vegano", "Intenso", "Premium"],
-    imageUrl: "https://images.unsplash.com/photo-1511381939415-e44015466834?auto=format&fit=crop&q=80&w=800"
+    tags: ["Zero Lactose", "Dietas", "Saudável"],
+    imageUrl: "/img/zero_lactose.png"
   }
 ];
 

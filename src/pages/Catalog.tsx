@@ -14,7 +14,7 @@ export default function Catalog() {
   const [categoryFilter, setCategoryFilter] = useState(initialCategory);
   
   // Updated categories for Easter Campaign matching mock data
-  const categories = ['Todos', 'Ao Leite', 'Especiais', 'Zero Lactose', 'Intenso'];
+  const categories = ['Todos', 'Ao Leite', 'Especiais', 'Dietas'];
 
   const filteredProducts = products.filter(p => 
     categoryFilter === 'Todos' ? true : p.category === categoryFilter
@@ -27,7 +27,7 @@ export default function Catalog() {
           <div>
             <h1 className="font-heading text-4xl font-bold text-primary mb-4">Catálogo de Páscoa</h1>
             <p className="text-foreground/70 max-w-xl">
-              Confira nossa seleção de produtos desenvolvidos com rigor técnico e qualidade superior.
+              Confira nossa seleção de produtos.
             </p>
           </div>
         </div>
@@ -61,9 +61,9 @@ export default function Catalog() {
             </div>
             
             <div className="bg-primary/5 p-6 rounded-sm">
-              <h4 className="font-heading font-bold text-primary mb-2">Atendimento Corporativo</h4>
+              <h4 className="font-heading font-bold text-primary mb-2">Atendimento</h4>
               <p className="text-sm text-foreground/70 mb-4">
-                Condições especiais para grandes volumes. Consulte nossa equipe.
+                Condições especiais. Consulte nossa equipe.
               </p>
               <a href="/contato" className="text-sm font-bold text-accent hover:underline">
                 Fale com a Equipe &rarr;

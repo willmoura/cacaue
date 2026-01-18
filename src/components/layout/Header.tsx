@@ -17,11 +17,21 @@ export default function Header() {
   return (
     <header className="sticky top-0 z-50 w-full border-b border-primary/10 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
       <div className="container flex h-20 items-center justify-between">
-        <Link to="/" className="flex items-center gap-2" onClick={() => setIsOpen(false)}>
+       <Link to="/" className="flex items-center gap-2" onClick={() => setIsOpen(false)}>
           <div className="size-8 rounded-sm bg-primary flex items-center justify-center">
              <span className="text-accent font-heading font-bold text-xl">C</span>
           </div>
-          <span className="font-heading text-2xl font-bold tracking-tight text-primary">Cacauê</span>
+          <div className="flex items-baseline gap-1">
+            <span className="font-heading text-2xl font-bold tracking-tight text-primary">
+              Cacauê
+            </span>
+            <span className="font-heading text-xl font-bold tracking-tight text-primary">
+               &
+            </span>
+            <span className="font-heading text-xl font-bold tracking-tight text-purple-700">
+               Ovos de Páscoa Du
+            </span>
+          </div>
         </Link>
 
         {/* Desktop Nav */}

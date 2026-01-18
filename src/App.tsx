@@ -6,10 +6,6 @@ import Footer from './components/layout/Footer';
 import Home from './pages/Home';
 import Catalog from './pages/Catalog';
 import ProductDetail from './pages/ProductDetail';
-import Process from './pages/Process';
-import Quality from './pages/Quality';
-import Contact from './pages/Contact';
-import Testimonials from './pages/Testimonials';
 import { createWhatsappLink } from './lib/utils';
 import { MessageCircle } from 'lucide-react';
 
@@ -30,14 +26,11 @@ export default function App() {
       <Header />
       <main>
         <AnimatePresence mode="wait">
+          {/* @ts-expect-error: */}
           <Routes location={location} key={location.pathname}>
             <Route path="/" element={<Home />} />
             <Route path="/catalogo" element={<Catalog />} />
             <Route path="/catalogo/:slug" element={<ProductDetail />} />
-            <Route path="/processo" element={<Process />} />
-            <Route path="/qualidade" element={<Quality />} />
-            <Route path="/contato" element={<Contact />} />
-            <Route path="/depoimentos" element={<Testimonials />} />
           </Routes>
         </AnimatePresence>
       </main>

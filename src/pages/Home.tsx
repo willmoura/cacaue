@@ -44,9 +44,10 @@ export default function Home() {
              transition={{ duration: 1.5, ease: "easeOut" }}
            >
              <img 
-              src="https://images.unsplash.com/photo-1616031036579-fc7e68fa7079?q=80&w=1920&auto=format&fit=crop"
-              alt="Ovo de Páscoa ao Leite sem embalagem"
+              src="/img/hero_crianca.png"
+              alt="Menino sorrindo segurando um grande ovo de Páscoa de chocolate"
               className="w-full h-full object-cover"
+              fetchPriority="high"
              />
            </motion.div>
            {/* Reduced Gradient Overlay for better image visibility */}
@@ -59,15 +60,13 @@ export default function Home() {
             variants={containerVariants}
             initial="hidden"
             animate="visible"
-          >
-            {/* Removed the 'Catálogo Páscoa' subtitle/badge as requested */}
+          >            
             <motion.h1 variants={itemVariants} className="font-heading text-4xl lg:text-5xl xl:text-5xl font-bold leading-tight mb-6 text-white">
               Ovos de Páscoa com o melhor chocolate.
             </motion.h1>
             <motion.p variants={itemVariants} className="text-white/80 text-lg mb-0 font-light leading-relaxed border-l-2 border-accent pl-6">
               Confira nosso catálogo de Ovos de Páscoa. Feitos com o melhor chocolate para atender prefeituras com qualidade e compromisso.
             </motion.p>
-            {/* Buttons removed for cleaner artisan look */}
           </motion.div>
         </div>
       </section>
@@ -137,7 +136,7 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Social Proof */}
+      {/*
       <section className="py-20 bg-primary text-background">
         <div className="container">
           <h2 className="font-heading text-2xl font-bold text-center mb-16 text-accent">Quem escolhe Cacauê</h2>
@@ -161,8 +160,37 @@ export default function Home() {
           </div>
         </div>
       </section>
-
-      {/* CTA - Institutional Focus (Replaces Scarcity/Artisan Text) */}
+      */}
+      
+      {/* Lista de Clientes */}
+      <section className="py-20 bg-primary text-background">
+        <div className="container">
+          <h2 className="font-heading text-2xl font-bold text-center mb-16 text-accent">
+            Quem já escolheu
+          </h2>
+          
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
+            {[
+              "Prefeitura de Bofete",
+              "Prefeitura de Pereiras",
+              "Prefeitura de Quadra",
+              "Prefeitura de Torre de Pedra",
+            ].map((cliente, idx) => (
+              <motion.div 
+                key={idx} 
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: idx * 0.1, duration: 0.5 }}
+                className="bg-white/5 border border-white/10 p-6 rounded-sm flex items-center justify-center text-center hover:bg-white/10 transition-colors h-32"
+              >
+                <p className="font-heading font-bold text-lg text-white/90">{cliente}</p>
+              </motion.div>
+            ))}
+          </div>
+        </div>
+      </section>
+      
       <section className="py-24 bg-background">
         <div className="container max-w-4xl text-center">
           <motion.div

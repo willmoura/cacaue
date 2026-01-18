@@ -13,7 +13,7 @@ export default function Footer() {
             <span className="font-heading text-2xl font-bold tracking-tight text-background">Cacauê</span>
           </div>
           <p className="text-white/70 text-sm leading-relaxed max-w-xs">
-            Indústria brasileira de chocolates. Qualidade superior e capacidade técnica para grandes volumes.
+            Indústria brasileira de chocolates. Qualidade superior.
           </p>
         </div>
 
@@ -28,18 +28,17 @@ export default function Footer() {
         <div>
           <h4 className="font-heading font-semibold text-accent mb-4">Categorias</h4>
           <ul className="space-y-2 text-sm text-white/70">
-            <li><Link to="/catalogo" className="hover:text-white transition-colors">Linha Intensa</Link></li>
-            <li><Link to="/catalogo" className="hover:text-white transition-colors">Crocantes & Inclusões</Link></li>
-            <li><Link to="/catalogo" className="hover:text-white transition-colors">Recheados</Link></li>
+            <li><Link to="/catalogo" className="hover:text-white transition-colors">Ao Leite</Link></li>
+            <li><Link to="/catalogo" className="hover:text-white transition-colors">Especiais</Link></li>
+            <li><Link to="/catalogo" className="hover:text-white transition-colors">Dietas</Link></li>
           </ul>
         </div>
 
         <div>
           <h4 className="font-heading font-semibold text-accent mb-4">Contato</h4>
           <ul className="space-y-2 text-sm text-white/70">
-            <li>Encomendas Exclusivas</li>
             <li>contato@cacaue.com.br</li>
-            <li>São Paulo - SP</li>
+            <li>Torre de Pedra - SP</li>
           </ul>
         </div>
       </div>

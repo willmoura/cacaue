@@ -1,13 +1,15 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import { products } from '../data/products';
 import { createWhatsappLink, cn } from '../lib/utils';
-import { ArrowLeft, Check, Download, Info } from 'lucide-react';
+import { ArrowLeft, Check, Download, Info, ChevronLeft, ChevronRight } from 'lucide-react';
 import PageWrapper from '../components/layout/PageWrapper';
+import { motion, AnimatePresence } from 'framer-motion';
 
 export default function ProductDetail() {
   const { slug } = useParams();
   const product = products.find(p => p.slug === slug);
+  const [currentImageIndex, setCurrentImageIndex] = useState(0);
 
   if (!product) {
     return (
@@ -18,6 +20,19 @@ export default function ProductDetail() {
     );
   }
 
+  // Define a lista de imagens: usa o array 'images' se existir, senão usa a 'imageUrl' única
+  const productImages = product.images && product.images.length > 0 
+    ? product.images 
+    : [product.imageUrl];
+
+  const nextImage = () => {
+    setCurrentImageIndex((prev) => (prev + 1) % productImages.length);
+  };
+
+  const prevImage = () => {
+    setCurrentImageIndex((prev) => (prev === 0 ? productImages.length - 1 : prev - 1));
+  };
+
   return (
     <PageWrapper className="bg-background min-h-screen">
       <div className="bg-white border-b border-primary/10">
@@ -27,14 +42,61 @@ export default function ProductDetail() {
           </Link>
           
           <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
-            {/* Image */}
-            <div className="bg-muted aspect-square rounded-sm overflow-hidden relative">
-              <img 
-                src={product.imageUrl} 
-                alt={product.name}
-                className="w-full h-full object-cover"
-              />
+            
+            {/* --- GALERIA INTERATIVA --- */}
+            <div className="space-y-4">
+              <div className="bg-muted aspect-square rounded-sm overflow-hidden relative group">
+                <AnimatePresence mode="wait">
+                  <motion.img 
+                    key={currentImageIndex}
+                    src={productImages[currentImageIndex]} 
+                    alt={product.name}
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    exit={{ opacity: 0 }}
+                    transition={{ duration: 0.3 }}
+                    className="w-full h-full object-cover"
+                  />
+                </AnimatePresence>
+
+                {/* Setas de Navegação (só aparecem se tiver mais de 1 foto) */}
+                {productImages.length > 1 && (
+                  <>
+                    <button 
+                      onClick={prevImage}
+                      className="absolute left-4 top-1/2 -translate-y-1/2 bg-white/80 hover:bg-white text-primary p-2 rounded-full shadow-lg opacity-0 group-hover:opacity-100 transition-opacity"
+                    >
+                      <ChevronLeft size={24} />
+                    </button>
+                    <button 
+                      onClick={nextImage}
+                      className="absolute right-4 top-1/2 -translate-y-1/2 bg-white/80 hover:bg-white text-primary p-2 rounded-full shadow-lg opacity-0 group-hover:opacity-100 transition-opacity"
+                    >
+                      <ChevronRight size={24} />
+                    </button>
+                  </>
+                )}
+              </div>
+
+              {/* Miniaturas (Thumbnails) */}
+              {productImages.length > 1 && (
+                <div className="flex gap-3 overflow-x-auto pb-2">
+                  {productImages.map((img, idx) => (
+                    <button
+                      key={idx}
+                      onClick={() => setCurrentImageIndex(idx)}
+                      className={cn(
+                        "relative w-20 h-20 rounded-sm overflow-hidden border-2 transition-all shrink-0",
+                        currentImageIndex === idx ? "border-primary opacity-100" : "border-transparent opacity-60 hover:opacity-100"
+                      )}
+                    >
+                      <img src={img} alt="" className="w-full h-full object-cover" />
+                    </button>
+                  ))}
+                </div>
+              )}
             </div>
+            {/* --- FIM DA GALERIA --- */}
 
             {/* Info */}
             <div>
@@ -85,17 +147,7 @@ export default function ProductDetail() {
                 >
                   Solicitar Proposta
                 </a>
-                <button 
-                  disabled
-                  className="flex-1 border border-primary/20 text-primary/40 text-center py-4 rounded-sm font-heading font-bold uppercase tracking-wide cursor-not-allowed flex items-center justify-center gap-2"
-                >
-                  <Download size={18} /> Ficha Técnica (PDF)
-                </button>
               </div>
-              
-              <p className="text-xs text-foreground/40 italic">
-                * Para acessar a documentação técnica completa, entre em contato com nosso departamento comercial.
-              </p>
             </div>
           </div>
         </div>
