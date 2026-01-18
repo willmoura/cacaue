@@ -52,7 +52,7 @@ export default function Footer() {
             <div className="bg-white/10 p-1.5 rounded-full group-hover:bg-[#E1306C] transition-colors">
               <Instagram size={16} />
             </div>
-            <span className="text-sm">@seu_usuario</span>
+            <span className="text-sm">@ovosdepascoadu</span>
           </a>
 
         </div>
