@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import { Menu, X } from 'lucide-react';
+import { Menu, X, Instagram } from 'lucide-react'; // <--- Adicionado Instagram aqui
 import { cn } from '../../lib/utils';
 import { createWhatsappLink } from '../../lib/utils';
 
@@ -8,11 +8,12 @@ export default function Header() {
   const [isOpen, setIsOpen] = useState(false);
   const location = useLocation();
 
-  // Adjusted navigation for Easter Campaign context
   const navLinks = [
     { name: 'Início', path: '/' },
     { name: 'Catálogo', path: '/catalogo' },
   ];
+
+  const instagramUrl = "https://www.instagram.com/ovosdepascoadu";
 
   return (
     <header className="sticky top-0 z-50 w-full border-b border-primary/10 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
@@ -35,7 +36,7 @@ export default function Header() {
         </Link>
 
         {/* Desktop Nav */}
-        <nav className="hidden md:flex gap-8 items-center">
+        <nav className="hidden md:flex gap-6 items-center">
           {navLinks.map((link) => (
             <Link
               key={link.path}
@@ -48,6 +49,18 @@ export default function Header() {
               {link.name}
             </Link>
           ))}
+
+          {/* Ícone Instagram Desktop */}
+          <a 
+            href={instagramUrl}
+            target="_blank" 
+            rel="noreferrer"
+            className="text-primary hover:text-purple-700 transition-colors"
+            aria-label="Siga-nos no Instagram"
+          >
+            <Instagram size={20} />
+          </a>
+
           <a
             href={createWhatsappLink("Olá, gostaria de encomendar ovos de Páscoa.")}
             target="_blank"
@@ -81,6 +94,18 @@ export default function Header() {
                 {link.name}
               </Link>
             ))}
+            
+            {/* Link Instagram Mobile */}
+            <a 
+              href={instagramUrl}
+              target="_blank" 
+              rel="noreferrer"
+              className="flex items-center gap-2 text-lg py-2 text-foreground/70 hover:text-purple-700"
+            >
+              <Instagram size={20} />
+              <span>Siga no Instagram</span>
+            </a>
+
             <a
               href={createWhatsappLink("Olá, gostaria de encomendar ovos de Páscoa.")}
               target="_blank"

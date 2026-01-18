@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import { Instagram } from 'lucide-react'; // <--- Adicionado Instagram aqui
 
 export default function Footer() {
   return (
@@ -40,6 +41,20 @@ export default function Footer() {
             <li>contato@cacaue.com.br</li>
             <li>Torre de Pedra - SP</li>
           </ul>
+
+          {/* Link Instagram no Footer */}
+          <a 
+            href="https://www.instagram.com/ovosdepascoadu" 
+            target="_blank" 
+            rel="noopener noreferrer"
+            className="flex items-center gap-2 mt-4 text-white/70 hover:text-white transition-colors group"
+          >
+            <div className="bg-white/10 p-1.5 rounded-full group-hover:bg-[#E1306C] transition-colors">
+              <Instagram size={16} />
+            </div>
+            <span className="text-sm">@seu_usuario</span>
+          </a>
+
         </div>
       </div>
       
