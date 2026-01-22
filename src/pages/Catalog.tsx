@@ -3,7 +3,7 @@ import { useLocation } from 'react-router-dom';
 import { products } from '../data/products';
 import ProductCard from '../components/ui/ProductCard';
 import PageWrapper from '../components/layout/PageWrapper';
-import { cn } from '../lib/utils';
+import { cn, trackClick } from '../lib/utils';
 import { Filter } from 'lucide-react';
 
 export default function Catalog() {
@@ -13,7 +13,6 @@ export default function Catalog() {
 
   const [categoryFilter, setCategoryFilter] = useState(initialCategory);
   
-  // Updated categories for Easter Campaign matching mock data
   const categories = ['Todos', 'Ao Leite', 'Especiais', 'Dietas'];
 
   const filteredProducts = products.filter(p => 
@@ -33,7 +32,6 @@ export default function Catalog() {
         </div>
 
         <div className="grid grid-cols-1 lg:grid-cols-4 gap-8">
-          {/* Filters Sidebar */}
           <div className="lg:col-span-1 space-y-8">
             <div className="bg-white p-6 rounded-sm border border-primary/5">
               <div className="flex items-center gap-2 mb-4 text-primary">
@@ -46,7 +44,10 @@ export default function Catalog() {
                 {categories.map(cat => (
                   <button
                     key={cat}
-                    onClick={() => setCategoryFilter(cat)}
+                    onClick={() => {
+                      setCategoryFilter(cat);
+                      trackClick(`Filter Category: ${cat}`);
+                    }}
                     className={cn(
                       "block w-full text-left px-3 py-2 text-sm rounded-sm transition-colors",
                       categoryFilter === cat 
@@ -65,13 +66,16 @@ export default function Catalog() {
               <p className="text-sm text-foreground/70 mb-4">
                 Condições especiais. Consulte nossa equipe.
               </p>
-              <a href="/contato" className="text-sm font-bold text-accent hover:underline">
+              <a 
+                href="/contato" 
+                onClick={() => trackClick('Catalog Contact Link')}
+                className="text-sm font-bold text-accent hover:underline"
+              >
                 Fale com a Equipe &rarr;
               </a>
             </div>
           </div>
 
-          {/* Product Grid */}
           <div className="lg:col-span-3">
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
               {filteredProducts.map(product => (

@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import { products } from '../data/products';
-import { createWhatsappLink, cn } from '../lib/utils';
+import { createWhatsappLink, cn, trackClick } from '../lib/utils';
 import { ArrowLeft, Check, Download, Info, ChevronLeft, ChevronRight } from 'lucide-react';
 import PageWrapper from '../components/layout/PageWrapper';
 import { motion, AnimatePresence } from 'framer-motion';
@@ -15,12 +15,17 @@ export default function ProductDetail() {
     return (
       <PageWrapper className="min-h-[60vh] flex flex-col items-center justify-center">
         <h2 className="text-2xl font-bold text-primary mb-4">Produto não encontrado</h2>
-        <Link to="/catalogo" className="text-accent underline">Voltar ao catálogo</Link>
+        <Link 
+          to="/catalogo" 
+          onClick={() => trackClick('Detail Error: Voltar ao catálogo')}
+          className="text-accent underline"
+        >
+          Voltar ao catálogo
+        </Link>
       </PageWrapper>
     );
   }
 
-  // Define a lista de imagens: usa o array 'images' se existir, senão usa a 'imageUrl' única
   const productImages = product.images && product.images.length > 0 
     ? product.images 
     : [product.imageUrl];
@@ -37,7 +42,11 @@ export default function ProductDetail() {
     <PageWrapper className="bg-background min-h-screen">
       <div className="bg-white border-b border-primary/10">
         <div className="container py-8">
-          <Link to="/catalogo" className="inline-flex items-center text-sm text-foreground/50 hover:text-primary mb-6">
+          <Link 
+            to="/catalogo" 
+            onClick={() => trackClick(`Detail: Voltar ao catálogo (${product.name})`)}
+            className="inline-flex items-center text-sm text-foreground/50 hover:text-primary mb-6"
+          >
             <ArrowLeft size={16} className="mr-1" /> Voltar ao catálogo
           </Link>
           
@@ -59,17 +68,16 @@ export default function ProductDetail() {
                   />
                 </AnimatePresence>
 
-                {/* Setas de Navegação (só aparecem se tiver mais de 1 foto) */}
                 {productImages.length > 1 && (
                   <>
                     <button 
-                      onClick={prevImage}
+                      onClick={() => { prevImage(); trackClick(`Detail Gallery: Prev (${product.name})`); }}
                       className="absolute left-4 top-1/2 -translate-y-1/2 bg-white/80 hover:bg-white text-primary p-2 rounded-full shadow-lg opacity-0 group-hover:opacity-100 transition-opacity"
                     >
                       <ChevronLeft size={24} />
                     </button>
                     <button 
-                      onClick={nextImage}
+                      onClick={() => { nextImage(); trackClick(`Detail Gallery: Next (${product.name})`); }}
                       className="absolute right-4 top-1/2 -translate-y-1/2 bg-white/80 hover:bg-white text-primary p-2 rounded-full shadow-lg opacity-0 group-hover:opacity-100 transition-opacity"
                     >
                       <ChevronRight size={24} />
@@ -78,13 +86,12 @@ export default function ProductDetail() {
                 )}
               </div>
 
-              {/* Miniaturas (Thumbnails) */}
               {productImages.length > 1 && (
                 <div className="flex gap-3 overflow-x-auto pb-2">
                   {productImages.map((img, idx) => (
                     <button
                       key={idx}
-                      onClick={() => setCurrentImageIndex(idx)}
+                      onClick={() => { setCurrentImageIndex(idx); trackClick(`Detail Gallery: Thumb ${idx} (${product.name})`); }}
                       className={cn(
                         "relative w-20 h-20 rounded-sm overflow-hidden border-2 transition-all shrink-0",
                         currentImageIndex === idx ? "border-primary opacity-100" : "border-transparent opacity-60 hover:opacity-100"
@@ -96,9 +103,7 @@ export default function ProductDetail() {
                 </div>
               )}
             </div>
-            {/* --- FIM DA GALERIA --- */}
 
-            {/* Info */}
             <div>
               <div className="flex gap-2 mb-4">
                 <span className="bg-primary/10 text-primary text-xs font-bold px-2 py-1 uppercase rounded-sm">
@@ -143,6 +148,7 @@ export default function ProductDetail() {
                   href={createWhatsappLink(`Olá, gostaria de solicitar um orçamento para o produto: ${product.name}`)}
                   target="_blank"
                   rel="noreferrer"
+                  onClick={() => trackClick(`Detail CTA: Solicitar Proposta (${product.name})`)}
                   className="flex-1 bg-secondary text-white text-center py-4 rounded-sm font-heading font-bold uppercase tracking-wide hover:bg-secondary/90 transition-all"
                 >
                   Solicitar Proposta
@@ -153,14 +159,14 @@ export default function ProductDetail() {
         </div>
       </div>
 
-      {/* Technical Details */}
       <div className="container py-16">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
           
-          {/* Specs */}
           <div>
             <h3 className="font-heading text-xl font-bold text-primary mb-6 flex items-center gap-2">
-              <Info size={24} className="text-accent" /> Especificações Técnicas
+              <span onClick={() => trackClick(`Detail Info: Specs (${product.name})`)} className="flex items-center gap-2 cursor-default">
+                <Info size={24} className="text-accent" /> Especificações Técnicas
+              </span>
             </h3>
             <ul className="space-y-3">
               {product.specs.map((spec, i) => (
@@ -172,7 +178,6 @@ export default function ProductDetail() {
             </ul>
           </div>
 
-          {/* Nutrition */}
           <div>
              <h3 className="font-heading text-xl font-bold text-primary mb-6">Tabela Nutricional</h3>
              <div className="bg-white border border-primary/10 rounded-sm overflow-hidden">

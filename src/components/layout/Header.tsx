@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import { Menu, X, Instagram } from 'lucide-react'; // <--- Adicionado Instagram aqui
-import { cn } from '../../lib/utils';
+import { Menu, X, Instagram } from 'lucide-react';
+import { cn, trackClick } from '../../lib/utils';
 import { createWhatsappLink } from '../../lib/utils';
 
 export default function Header() {
@@ -18,7 +18,7 @@ export default function Header() {
   return (
     <header className="sticky top-0 z-50 w-full border-b border-primary/10 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
       <div className="container flex h-20 items-center justify-between">
-       <Link to="/" className="flex items-center gap-2" onClick={() => setIsOpen(false)}>
+       <Link to="/" className="flex items-center gap-2" onClick={() => { setIsOpen(false); trackClick('Logo Header'); }}>
           <div className="size-8 rounded-sm bg-primary flex items-center justify-center">
              <span className="text-accent font-heading font-bold text-xl">C</span>
           </div>
@@ -41,6 +41,7 @@ export default function Header() {
             <Link
               key={link.path}
               to={link.path}
+              onClick={() => trackClick(`Header Nav - ${link.name}`)}
               className={cn(
                 "text-sm font-medium transition-colors hover:text-accent",
                 location.pathname === link.path ? "text-primary font-semibold" : "text-foreground/80"
@@ -55,6 +56,7 @@ export default function Header() {
             href={instagramUrl}
             target="_blank" 
             rel="noreferrer"
+            onClick={() => trackClick('Instagram Header Desktop')}
             className="text-primary hover:text-purple-700 transition-colors"
             aria-label="Siga-nos no Instagram"
           >
@@ -65,6 +67,7 @@ export default function Header() {
             href={createWhatsappLink("Olá, gostaria de encomendar ovos de Páscoa.")}
             target="_blank"
             rel="noreferrer"
+            onClick={() => trackClick('WhatsApp Header Desktop')}
             className="bg-secondary text-secondary-foreground px-5 py-2.5 rounded-sm font-heading font-semibold text-sm hover:bg-secondary/90 transition-all"
           >
             Fale Conosco
@@ -85,7 +88,7 @@ export default function Header() {
               <Link
                 key={link.path}
                 to={link.path}
-                onClick={() => setIsOpen(false)}
+                onClick={() => { setIsOpen(false); trackClick(`Header Nav Mobile - ${link.name}`); }}
                 className={cn(
                   "text-lg py-2 border-b border-primary/5",
                   location.pathname === link.path ? "text-primary font-semibold" : "text-foreground/70"
@@ -100,6 +103,7 @@ export default function Header() {
               href={instagramUrl}
               target="_blank" 
               rel="noreferrer"
+              onClick={() => trackClick('Instagram Header Mobile')}
               className="flex items-center gap-2 text-lg py-2 text-foreground/70 hover:text-purple-700"
             >
               <Instagram size={20} />
@@ -110,6 +114,7 @@ export default function Header() {
               href={createWhatsappLink("Olá, gostaria de encomendar ovos de Páscoa.")}
               target="_blank"
               rel="noreferrer"
+              onClick={() => trackClick('WhatsApp Header Mobile')}
               className="bg-secondary text-secondary-foreground w-full py-3 rounded-sm font-heading font-semibold text-center mt-2"
             >
               Encomendar via WhatsApp

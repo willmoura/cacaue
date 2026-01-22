@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { Instagram } from 'lucide-react'; // <--- Adicionado Instagram aqui
+import { Instagram } from 'lucide-react';
+import { trackClick } from '../../lib/utils';
 
 export default function Footer() {
   return (
@@ -21,17 +22,17 @@ export default function Footer() {
         <div>
           <h4 className="font-heading font-semibold text-accent mb-4">Navegação</h4>
           <ul className="space-y-2 text-sm text-white/70">
-            <li><Link to="/" className="hover:text-white transition-colors">Início</Link></li>
-            <li><Link to="/catalogo" className="hover:text-white transition-colors">Catálogo Completo</Link></li>
+            <li><Link to="/" onClick={() => trackClick('Footer Nav - Início')} className="hover:text-white transition-colors">Início</Link></li>
+            <li><Link to="/catalogo" onClick={() => trackClick('Footer Nav - Catálogo')} className="hover:text-white transition-colors">Catálogo Completo</Link></li>
           </ul>
         </div>
 
         <div>
           <h4 className="font-heading font-semibold text-accent mb-4">Categorias</h4>
           <ul className="space-y-2 text-sm text-white/70">
-            <li><Link to="/catalogo" className="hover:text-white transition-colors">Ao Leite</Link></li>
-            <li><Link to="/catalogo" className="hover:text-white transition-colors">Especiais</Link></li>
-            <li><Link to="/catalogo" className="hover:text-white transition-colors">Dietas</Link></li>
+            <li><Link to="/catalogo" onClick={() => trackClick('Footer Category - Ao Leite')} className="hover:text-white transition-colors">Ao Leite</Link></li>
+            <li><Link to="/catalogo" onClick={() => trackClick('Footer Category - Especiais')} className="hover:text-white transition-colors">Especiais</Link></li>
+            <li><Link to="/catalogo" onClick={() => trackClick('Footer Category - Dietas')} className="hover:text-white transition-colors">Dietas</Link></li>
           </ul>
         </div>
 
@@ -47,6 +48,7 @@ export default function Footer() {
             href="https://www.instagram.com/ovosdepascoadu" 
             target="_blank" 
             rel="noopener noreferrer"
+            onClick={() => trackClick('Instagram Footer')}
             className="flex items-center gap-2 mt-4 text-white/70 hover:text-white transition-colors group"
           >
             <div className="bg-white/10 p-1.5 rounded-full group-hover:bg-[#E1306C] transition-colors">

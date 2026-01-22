@@ -3,14 +3,15 @@ import { Link } from 'react-router-dom';
 import { ArrowRight } from 'lucide-react';
 import { motion } from 'framer-motion';
 import { Product } from '../../data/products';
+import { trackClick } from '../../lib/utils';
 
-// Create a motion component from the Link
-const MotionLink = motion(Link); // using motion(Link) is deprecated in newer framer versions in favor of motion.create(Link), but keeping compatible
+const MotionLink = motion(Link);
 
 const ProductCard: React.FC<{ product: Product }> = ({ product }) => {
   return (
     <MotionLink 
       to={`/catalogo/${product.slug}`}
+      onClick={() => trackClick(`Product Card: ${product.name}`)}
       className="group block bg-white border border-primary/5 overflow-hidden rounded-sm"
       initial="rest"
       whileHover="hover"
@@ -38,7 +39,6 @@ const ProductCard: React.FC<{ product: Product }> = ({ product }) => {
           loading="lazy"
         />
         
-        {/* Category Badge Restored */}
         <div className="absolute top-3 left-3 z-10">
            <span className="bg-primary/90 backdrop-blur-sm text-white text-[10px] font-bold px-3 py-1.5 uppercase tracking-widest rounded-sm shadow-sm">
              {product.category}
@@ -49,8 +49,8 @@ const ProductCard: React.FC<{ product: Product }> = ({ product }) => {
         <motion.h3 
           className="font-heading font-bold text-lg text-primary mb-2 transition-colors"
           variants={{
-            rest: { color: "#2D1B14" }, // Primary
-            hover: { color: "#B8860B" } // Accent
+            rest: { color: "#2D1B14" },
+            hover: { color: "#B8860B" }
           }}
         >
           {product.name}

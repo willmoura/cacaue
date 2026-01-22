@@ -6,7 +6,7 @@ import Footer from './components/layout/Footer';
 import Home from './pages/Home';
 import Catalog from './pages/Catalog';
 import ProductDetail from './pages/ProductDetail';
-import { createWhatsappLink } from './lib/utils';
+import { createWhatsappLink, trackClick } from './lib/utils';
 import { MessageCircle } from 'lucide-react';
 
 function ScrollToTop() {
@@ -41,6 +41,7 @@ export default function App() {
         href={createWhatsappLink()}
         target="_blank"
         rel="noreferrer"
+        onClick={() => trackClick('WhatsApp Floating Button')}
         className="fixed bottom-6 right-6 z-50 bg-green-600 text-white p-4 rounded-full shadow-lg hover:bg-green-700 hover:scale-110 transition-all duration-300 animate-in fade-in zoom-in"
         aria-label="Fale conosco no WhatsApp"
       >

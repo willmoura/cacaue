@@ -4,13 +4,12 @@ import { ArrowRight, Thermometer, Gem, Clock } from 'lucide-react';
 import { products, testimonials } from '../data/products';
 import ProductCard from '../components/ui/ProductCard';
 import PageWrapper from '../components/layout/PageWrapper';
-import { createWhatsappLink } from '../lib/utils';
+import { createWhatsappLink, trackClick } from '../lib/utils';
 import { motion } from 'framer-motion';
 
 export default function Home() {
   const featuredProducts = products.slice(0, 3);
 
-  // Animation variants for staggering text
   const containerVariants = {
     hidden: { opacity: 0 },
     visible: { 
@@ -33,9 +32,7 @@ export default function Home() {
 
   return (
     <PageWrapper className="flex flex-col min-h-screen">
-      {/* Hero Section */}
       <section className="relative min-h-[90vh] grid grid-cols-1 lg:grid-cols-12 bg-primary overflow-hidden">
-        {/* Image Container with fallback background */}
         <div className="lg:col-span-7 relative h-[50vh] lg:h-auto overflow-hidden bg-[#2D1B14]">
            <motion.div 
              className="absolute inset-0 w-full h-full"
@@ -50,11 +47,9 @@ export default function Home() {
               fetchPriority="high"
              />
            </motion.div>
-           {/* Reduced Gradient Overlay for better image visibility */}
            <div className="absolute inset-0 bg-gradient-to-t from-primary/80 via-transparent to-transparent lg:bg-gradient-to-l lg:from-primary lg:via-primary/30 lg:to-transparent z-10"></div>
         </div>
         
-        {/* Content Container */}
         <div className="lg:col-span-5 bg-primary text-background flex flex-col justify-center p-8 lg:p-12 xl:p-16 z-20 relative shadow-2xl">
           <motion.div 
             variants={containerVariants}
@@ -71,7 +66,6 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Value Props - Technical Focus */}
       <section className="py-20 bg-background">
         <div className="container">
           <div className="grid grid-cols-1 md:grid-cols-3 gap-12">
@@ -111,15 +105,17 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Featured Products - Easter Collection */}
       <section className="py-24 bg-white">
         <div className="container">
           <div className="flex justify-between items-end mb-12">
             <div>
               <h2 className="font-heading text-3xl font-bold text-primary mb-2">Catálogo Páscoa</h2>
-              {/* Removed "Edição limitada e numerada." text */}
             </div>
-            <Link to="/catalogo" className="hidden md:flex items-center text-primary font-semibold hover:text-accent transition-colors">
+            <Link 
+              to="/catalogo" 
+              onClick={() => trackClick('Home: Ver catálogo completo (Desktop)')}
+              className="hidden md:flex items-center text-primary font-semibold hover:text-accent transition-colors"
+            >
               Ver catálogo completo <ArrowRight size={18} className="ml-2" />
             </Link>
           </div>
@@ -129,40 +125,17 @@ export default function Home() {
             ))}
           </div>
           <div className="mt-12 text-center md:hidden">
-            <Link to="/catalogo" className="btn btn-primary inline-flex items-center font-bold text-primary border border-primary px-6 py-3 rounded-sm">
+            <Link 
+              to="/catalogo" 
+              onClick={() => trackClick('Home: Ver catálogo completo (Mobile)')}
+              className="btn btn-primary inline-flex items-center font-bold text-primary border border-primary px-6 py-3 rounded-sm"
+            >
               Ver catálogo completo
             </Link>
           </div>
         </div>
       </section>
 
-      {/*
-      <section className="py-20 bg-primary text-background">
-        <div className="container">
-          <h2 className="font-heading text-2xl font-bold text-center mb-16 text-accent">Quem escolhe Cacauê</h2>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-            {testimonials.slice(0, 2).map((t, idx) => (
-              <motion.div 
-                key={t.id} 
-                initial={{ opacity: 0, x: idx === 0 ? -20 : 20 }}
-                whileInView={{ opacity: 1, x: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.6 }}
-                className="bg-white/5 border border-white/10 p-8 rounded-sm hover:bg-white/10 transition-colors"
-              >
-                <p className="font-serif italic text-lg text-white/80 mb-6">"{t.text}"</p>
-                <div>
-                  <p className="font-heading font-bold text-accent">{t.source}</p>
-                  <p className="text-sm text-white/50">{t.role} • {t.location}</p>
-                </div>
-              </motion.div>
-            ))}
-          </div>
-        </div>
-      </section>
-      */}
-      
-      {/* Lista de Clientes */}
       <section className="py-20 bg-primary text-background">
         <div className="container">
           <h2 className="font-heading text-2xl font-bold text-center mb-16 text-accent">
@@ -209,6 +182,7 @@ export default function Home() {
               href={createWhatsappLink("Olá, gostaria de mais informações sobre os produtos Cacauê.")}
               target="_blank"
               rel="noreferrer"
+              onClick={() => trackClick('Home: Fale Conosco (WhatsApp Bottom)')}
               whileHover={{ scale: 1.02 }}
               whileTap={{ scale: 0.98 }}
               className="inline-block bg-secondary text-white px-10 py-4 rounded-sm font-heading font-bold text-lg shadow-xl"
